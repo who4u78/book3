@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; 조절효과와 매개효과 – 통알못을 위한 기초통계 3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter4.html" rel="next">
+<link href="./chapter2.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-375c9095c3150554df871ba417ef6047.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter3.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조절효과와 매개효과</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">통알못을 위한 기초통계 3</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">카이제곱(<span class="math inline">\(\chi^2\)</span>) 검정</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">회귀분석</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조절효과와 매개효과</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">로지스틱 회귀분석</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#조절효과란-무엇인가" id="toc-조절효과란-무엇인가" class="nav-link active" data-scroll-target="#조절효과란-무엇인가"><span class="header-section-number">3.1</span> 조절효과란 무엇인가?</a>
+  <ul class="collapse">
+  <li><a href="#조절효과의-정의" id="toc-조절효과의-정의" class="nav-link" data-scroll-target="#조절효과의-정의"><span class="header-section-number">3.1.1</span> 조절효과의 정의</a></li>
+  <li><a href="#조절효과의-예제" id="toc-조절효과의-예제" class="nav-link" data-scroll-target="#조절효과의-예제"><span class="header-section-number">3.1.2</span> 조절효과의 예제</a></li>
+  <li><a href="#그래프로-이해하는-조절효과" id="toc-그래프로-이해하는-조절효과" class="nav-link" data-scroll-target="#그래프로-이해하는-조절효과"><span class="header-section-number">3.1.3</span> 그래프로 이해하는 조절효과</a></li>
+  <li><a href="#조절효과에-대한-정리" id="toc-조절효과에-대한-정리" class="nav-link" data-scroll-target="#조절효과에-대한-정리"><span class="header-section-number">3.1.4</span> 조절효과에 대한 정리</a></li>
+  <li><a href="#추천논문" id="toc-추천논문" class="nav-link" data-scroll-target="#추천논문"><span class="header-section-number">3.1.5</span> 추천논문</a></li>
+  </ul></li>
+  <li><a href="#조절효과를-실습해-보자" id="toc-조절효과를-실습해-보자" class="nav-link" data-scroll-target="#조절효과를-실습해-보자"><span class="header-section-number">3.2</span> 조절효과를 실습해 보자</a></li>
+  <li><a href="#매개효과란-무엇인가" id="toc-매개효과란-무엇인가" class="nav-link" data-scroll-target="#매개효과란-무엇인가"><span class="header-section-number">3.3</span> 매개효과란 무엇인가?</a>
+  <ul class="collapse">
+  <li><a href="#매개효과의-의미와-중요성" id="toc-매개효과의-의미와-중요성" class="nav-link" data-scroll-target="#매개효과의-의미와-중요성"><span class="header-section-number">3.3.1</span> 매개효과의 의미와 중요성</a></li>
+  <li><a href="#매개효과의-종류" id="toc-매개효과의-종류" class="nav-link" data-scroll-target="#매개효과의-종류"><span class="header-section-number">3.3.2</span> 매개효과의 종류</a></li>
+  <li><a href="#매개효과-검정방법" id="toc-매개효과-검정방법" class="nav-link" data-scroll-target="#매개효과-검정방법"><span class="header-section-number">3.3.3</span> 매개효과 검정방법</a></li>
+  <li><a href="#단계-매개효과-검증방법의-문제점" id="toc-단계-매개효과-검증방법의-문제점" class="nav-link" data-scroll-target="#단계-매개효과-검증방법의-문제점"><span class="header-section-number">3.3.4</span> 3단계 매개효과 검증방법의 문제점</a></li>
+  <li><a href="#sobel-테스트" id="toc-sobel-테스트" class="nav-link" data-scroll-target="#sobel-테스트"><span class="header-section-number">3.3.5</span> Sobel 테스트</a></li>
+  <li><a href="#그렇다면-어떻게" id="toc-그렇다면-어떻게" class="nav-link" data-scroll-target="#그렇다면-어떻게"><span class="header-section-number">3.3.6</span> 그렇다면 어떻게?</a></li>
+  </ul></li>
+  <li><a href="#매개효과를-실습해-보자" id="toc-매개효과를-실습해-보자" class="nav-link" data-scroll-target="#매개효과를-실습해-보자"><span class="header-section-number">3.4</span> 매개효과를 실습해 보자</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조절효과와 매개효과</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="조절효과란-무엇인가" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="조절효과란-무엇인가"><span class="header-section-number">3.1</span> 조절효과란 무엇인가?</h2>
+<section id="조절효과의-정의" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="조절효과의-정의"><span class="header-section-number">3.1.1</span> 조절효과의 정의</h3>
+<p>논문을 작성하다 보면 가장 많이 사용하는 두 가지가 바로 조절효과와 매개효과입니다. 조절효과는 Moderating effect라고 표현하고 조절변수를 Moderator라고 부릅니다. 이번 장에서는 조절효과와 매개효과에 대해 알아보겠습니다.</p>
+<p>조절효과란 회귀분석에서 발견된 종속변수에 대한 독립변수의 영향력이 회귀계수의 방향이 바뀌거나 회귀계수의 크기(힘)가 변화하는 경우를 의미합니다.</p>
+<ul>
+<li>방향이 변화한다는 것은 회귀계수가 +에서 -로 혹은 -에서 +로 바뀌는 것을 의미합니다</li>
+<li>힘의 크기가 변화한다는 것은 회귀계수가 더 커지거나 작아지는 것을 의미합니다</li>
+</ul>
+</section>
+<section id="조절효과의-예제" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="조절효과의-예제"><span class="header-section-number">3.1.2</span> 조절효과의 예제</h3>
+<p>다음과 같은 간단한 예제를 하나 생각해보겠습니다.</p>
+<ul>
+<li>종속변수: 지출(<span class="math inline">\(y_i\)</span>)</li>
+<li>독립변수: 수입(<span class="math inline">\(x_i\)</span>)</li>
+<li>조절변수: 성별(<span class="math inline">\(D_i\)</span>)</li>
+</ul>
+<p>위의 세 개의 변수를 이용해 회귀식을 단계적으로 만들어 보겠습니다.</p>
+<ol type="1">
+<li>기본회귀식</li>
+</ol>
+<ul>
+<li><span class="math inline">\(y_i = \alpha + \beta_1 x_i\)</span></li>
+</ul>
+<ol start="2" type="1">
+<li>기본회귀식 + 성별 더미변수</li>
+</ol>
+<ul>
+<li><span class="math inline">\(y_i = \alpha + \beta_1 x_i + \beta_2 D_i\)</span></li>
+</ul>
+<ol start="3" type="1">
+<li>조절효과 회귀식</li>
+</ol>
+<ul>
+<li><span class="math inline">\(y_i = \alpha + \beta_1 x_i + \beta_2 D_i + \beta_3 x_i D_i\)</span></li>
+</ul>
+<p>문제는 위와 같이 회귀식 3개를 써 놓으면 더 이상 조절효과를 이해하지 못한다는 것입니다. 위의 세 개의 회귀식을 그림으로 그려보면서 조절효과가 의미하는 것이 무엇인지 조금 더 자세하게 알아보겠습니다.</p>
+</section>
+<section id="그래프로-이해하는-조절효과" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="그래프로-이해하는-조절효과"><span class="header-section-number">3.1.3</span> 그래프로 이해하는 조절효과</h3>
+<ol type="1">
+<li>기본회귀식</li>
+</ol>
+<ul>
+<li><span class="math inline">\(y_i = \alpha + \beta_1 x_i\)</span></li>
+</ul>
+<div id="fig-img11.1" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-img11.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img11.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: 기본회귀식
+</figcaption>
+</figure>
+</div>
+<p>기본회귀식이 내포하는 연구가설은 독립변수 <span class="math inline">\(x_i\)</span>인 수입이 증가할 수록 종속변수 <span class="math inline">\(y_i\)</span> 지출이 증가할 것이라는 것입니다. 이 연구가설은 회귀계수 <span class="math inline">\(\beta_1\)</span>에 의해 검정됩니다. 만약 <span class="math inline">\(\beta_1\)</span>이 정의 방향으로 유의하다면 연구가설은 채택됩니다.</p>
+<ol start="2" type="1">
+<li>기본회귀식 + 성별 더미변수</li>
+</ol>
+<ul>
+<li><span class="math inline">\(y_i = \alpha + \beta_1 x_i + \beta_2 D_i\)</span></li>
+</ul>
+<p>그럼 이제, 기본회귀식에 성별 더미변수를 추가해보겠습니다. 여기서 성별 더미변수 <span class="math inline">\(D_i\)</span>는 남성인 경우 <span class="math inline">\(D_i=0\)</span>으로 여성인 경우 <span class="math inline">\(D_i=1\)</span>로 정의 하겠습니다. 이렇게 되면 새로운 두 번째의 회귀식은 남성의 회귀식과 여성의 회귀식으로 나눠서 두 개의 회귀식을 구분할 수 있습니다.</p>
+<ul>
+<li>남성의 회귀식: <span class="math inline">\(y_i = \alpha + \beta_1 x_i\)</span></li>
+<li>여성의 회귀식: <span class="math inline">\(y_i = (\alpha + \beta_2) + \beta_1 x_i\)</span></li>
+</ul>
+<p>남성의 경우 성별 더미변수 <span class="math inline">\(D_i=0\)</span>이기 때문에 결국 기본회귀식과 동일한 회귀식이 됩니다. 반면에, 여성의 회귀식은 <span class="math inline">\(D_i=1\)</span>이므로 <span class="math inline">\(\beta_2\)</span>가 상수가 되어 절편 <span class="math inline">\(\alpha\)</span>와 합쳐질 수 있습니다. 그러므로, 만약 <span class="math inline">\(\beta_2\)</span>가 정의 방향(+)로 유의하다면, 남성의 회귀식과 여성의 회귀식은 다음과 같이 그릴 수 있습니다.</p>
+<div id="fig-img11.2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-img11.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img11-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img11.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: 기본회귀식+성별 더미변수
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-img11.2" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> 에서 보듯이 우측의 남성의 회귀식은 결론적으로는 기본회귀식과 동일하고, 여성의 회귀식은 절편이 <span class="math inline">\(\alpha\)</span>에서 <span class="math inline">\(\alpha + \beta_2\)</span>가 되어 <span class="math inline">\(\beta_2\)</span>만큼 증가한 모양이 됩니다. 기울기 <span class="math inline">\(\beta_1\)</span>은 그대로라는 점이 중요합니다. 이런 경우 연구가설을 말로 풀어서 쓴다면 어떻게 해야 할까요? 제가 이 부분을 강조하는 이유는 대부분의 학생들이 이것을 그림으로 보고 이해하는 것 같아도 실제로 연구가설을 글로 써보라고 하면 전혀 다른 말을 쓰기 때문입니다. 뿐만 아니라 결과의 해석도 이상하게 하는 경우가 많습니다.</p>
+<ul>
+<li>연구가설: 여성이 남성에 비해 더 많이 지출할 것이다.</li>
+<li>결과해석: 여성이 남성에 비해 평균적으로 <span class="math inline">\(\beta_2\)</span>만큼 더 유의하게 지출한다.</li>
+</ul>
+<p>그러므로 이 경우 <span class="math inline">\(\beta_2\)</span>의 유의성이 의미하는 것은 절편의 증가(또는 감소)입니다. 다시 한 번, 이야기하자면 회귀분석에서 절편이 의미하는 것은 종속변수 <span class="math inline">\(y_i\)</span>의 평균값이라는 것입니다. 즉, 여성 집단의 평균 지출 금액이 남성에 비해 평균적으로 <span class="math inline">\(\beta_2\)</span>만큼 높다는 것입니다. 여기서 주의할 점은 이렇게 평균적으로 높은 지출금액은 수입과 관계 없이 높다는 점이 중요합니다. <a href="#fig-img11.2" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> 를 보면 여성과 남성의 두 회귀식이 평행한 것을 볼 수 있습니다. 당연히 두 회귀직선의 기울기가 동일하기 때문입니다. 따라서 이 두번째 모델 (기본회귀식+성별 더미변수)을 이용한 회귀분석의 결과를 해석할 때, 수입의 증가는 여성과 남성의 평균지출의 차이에 아무런 영향이 없다는 것입니다. 만약 수입의 증감 혹은 수입의 차이에 따라 남성과 연성의 지출 차이가 달라진다고 해석하면 잘못 해석한 것이 됩니다.</p>
+<ol start="3" type="1">
+<li>조절효과 회귀식</li>
+</ol>
+<ul>
+<li><span class="math inline">\(y_i = \alpha + \beta_1 x_i + \beta_2 D_i + \beta_3 x_i D_i\)</span></li>
+</ul>
+<p>위에서 한 것처럼, 여성의 회귀식과 남성의 회귀식으로 나눠보겠습니다.</p>
+<ul>
+<li>남성의 회귀식: <span class="math inline">\(y_i = \alpha + \beta_1 x_i\)</span></li>
+<li>여성의 회귀식: <span class="math inline">\(y_i = (\alpha + \beta_2) + (\beta_1 + \beta_3) x_i\)</span></li>
+</ul>
+<p>위와 동일하게 남성의 회귀식은 기본회귀식과 똑같습니다. 여성의 회귀식은 두번째처럼 절편이 <span class="math inline">\(\alpha + \beta_2\)</span>이지만, 기울기가 다릅니다. 기본회귀식과 위의 경우 모두 기울기는 <span class="math inline">\(\beta_1\)</span>이었습니다. 그러나, 조절효과의 회귀식에서 여성의 회귀식의 기울기는 <span class="math inline">\(\beta_1 + \beta_3\)</span>가 됩니다. 즉, <span class="math inline">\(\beta_3\)</span>가 정의 방향(+)으로 유의하다면 여성의 회귀식의 기울기는 더 가파르게 증가하게 됩니다. 이제 그림으로 확인해 보겠습니다.</p>
+<div id="fig-img11.3" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-img11.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img11-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img11.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: 조절효과 회귀식
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-img11.3" class="quarto-xref">Figure&nbsp;<span>3.3</span></a> 는 기본회귀식에 성별더미만 추가한 경우(좌측)와 조절회귀식의 경우(우측)를 비교해서 보여줍니다. 우측에서 보는 것처럼 여성의 회귀식의 기울기가 더 가파르게 증가하는 것을 볼 수 있습니다. 즉, 기울기가 <span class="math inline">\(\beta_3\)</span>더 빠르게 증가하는 것입니다. 이를 어떻게 해석해야할 까요?</p>
+<p>우선 앞의 경우와 동일하게 여성이 남성에 비해 평균적으로 <span class="math inline">\(\beta_2\)</span>만큼 더 지출하고 있는 것은 동일합니다. 여기에 더해 여성은 남성에 비해 수입이 동일하게 1단위 증가한다 할지라도 <span class="math inline">\(\beta_3\)</span>만큼 더 지출한다는 의미가 됩니다. 여기서 수입 1단위는 데이터상에서 수입의 기본 단위(unit)를 의미합니다. 만약 조사가 100만원 단위로 이루어졌고 <span class="math inline">\(\beta_3 = 12\)</span>라면 여성은 남성에 비해 수입이 동일하게 100만원 증가한다 할지라도 평균적으로 12만원을 더 지출한다는 의미가 됩니다. 좀 더 자세하게 해석하자면, 만약 <span class="math inline">\(\beta_1=60\)</span>이었다고 가정하면, 남성은 수입이 100만원 증가할 때, 평균적으로 60만원의 지출이 더 증가하지만, 어성은 동일하게 수입이 100만원 증가할 때, 평균적으로 지출이 72만원 증가한다는 의미가 됩니다.</p>
+</section>
+<section id="조절효과에-대한-정리" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="조절효과에-대한-정리"><span class="header-section-number">3.1.4</span> 조절효과에 대한 정리</h3>
+<ul>
+<li>조절효과를 확인하기 위해서는
+<ul>
+<li>기존의 독립변수에 조절변수를 추가적인 독립변수로 투입하고</li>
+<li>독립변수와 조절변수를 곱한 교호작용변수 (interaction)을 투입하여</li>
+<li>교호작용변수가 유의한지 확인합니다</li>
+<li>만약, 교호작용변수가 유의하면 조절효과가 있다고 판단합니다</li>
+</ul></li>
+<li>조절효과가 중요한 이유
+<ul>
+<li>조절효과는 선형관계를 확인하는 회귀분석에서 비선형관계를 알 수 있는 중요한 방법이기 때문입니다</li>
+</ul></li>
+</ul>
+<p>여기서 비선형 관계란 무엇일까요? 앞에서도 몇 번 이야기한적 있지만 선형관계 즉 linear relationship이란 독립변수와 종속변수의 관계가 직선적인 것을 의미합니다. 직선적이란 회귀분석에서 기울기 <span class="math inline">\(\beta\)</span>가 변하지 않는 것을 의미합니다. 기울기가 독립변수의 값의 크기에 관계없이 일정한 것이 바로 회귀분석에서의 선형관계입니다.</p>
+<p>그런데, 조절변수가 등장하면서 이 선형관계가 변합니다. 위의 예에서는 수입과 지출의 선형관계가 성별이라는 더미변수에 의해 변화하는 것입니다. 왜냐하면 성별에 따라 즉 남성과 여성의 회귀식의 기울기가 달라졌기 때문입니다. 여기서 다시 말씀드리자면 남성과 여성의 회귀식이 다르다는 표현을 통계에서 사용하려면 남성과 여성의 회귀식이 같은지 다른지 테스트를 해야합니다.</p>
+<ul>
+<li><span class="math inline">\(y_i = \alpha + \beta_1 x_i + \beta_2 D_i + \beta_3 x_i D_i\)</span>
+<ul>
+<li>남성의 회귀식: <span class="math inline">\(y_i = \alpha + \beta_1 x_i\)</span></li>
+<li>여성의 회귀식: <span class="math inline">\(y_i = (\alpha + \beta_2) + (\beta_1 + \beta_3) x_i\)</span></li>
+</ul></li>
+</ul>
+<p>아마도 어떤 분들은 그렇게 질문하실지도 모르겠네요. 아니 언제 남성과 여성의 회귀식 기울기가 같은지 다른지 테스트 한적이 있나요? 별도의 테스트를 한적이 없는데요? 사실 이게 헷갈리수도 있는데 우리는 이미 테스트를 마쳤습니다. 위의 회귀식을 다시 보면, 남성 회귀식의 기울기는 <span class="math inline">\(\beta_1\)</span>이고 여성 회귀식의 기울기는 <span class="math inline">\(\beta_1 + \beta_3\)</span>입니다. 그러면 두 회귀식의 차이는 기울기 <span class="math inline">\(\beta_3\)</span>입니다.</p>
+<p>원래의 회귀식을 보면 가장 마지막의 변수 <span class="math inline">\(x_i D_i\)</span>가 교호작용 변수 쉽게 interaction인데 이변수가 유의한지 아닌지를 보면 조절효과가 있는지 없는지 알 수 있습니다. 왜냐하면 이 interaction의 회귀계수가 <span class="math inline">\(\beta_3\)</span>이기 때문입니다. 그러므로, 만약 <span class="math inline">\(\beta_3\)</span>가 유의하면 조절효과가 유의한 것이고, <span class="math inline">\(\beta_3\)</span>가 유의하지 않다면 조절효과가 유의하지 않은 것입니다.</p>
+<p>헷갈리면 안되는 것이 우리가 테스트 하는 회귀식은 단 하나의 조절회귀식입니다. 이 회귀식을 가지고 통계 프로그램에서 회귀분석을 하는 것이지 남성회귀식 여성회귀식을 따로 돌리는 것이 아닙니다. 이미 조절회귀식 한 번만 돌리면 그리고 마지막의 interaction 변수의 회귀계수 <span class="math inline">\(\beta_3\)</span>가 유의한지 아닌지만 보면 조절효과가 유의한지 아닌지 알 수 있는 것이지요.</p>
+</section>
+<section id="추천논문" class="level3" data-number="3.1.5">
+<h3 data-number="3.1.5" class="anchored" data-anchor-id="추천논문"><span class="header-section-number">3.1.5</span> 추천논문</h3>
+<p>제가 조절효과와 매개효과에 대해 강의할 때마다 학생들에게 제발 한 번만 읽어보라고 하는 논문이 바로 Baron &amp; Kenny(1986) 논문입니다. 물론 최근에 와서는 이 Baron &amp; Kenny (1986) 논문이 너무 과도하게 사용되고 또한 문제점이 지적되면서 인용이 줄고 있기는 하지만 여전히 조절효과와 매개효과에 대한 이해를 위해서는 가장 잘 설명되어 있고 쉽게 풀어 놓은 논문입니다. 영어이긴 하지만 매우 쉬운 영어로 되어있어 꼭 한번 읽어보시길 바랍니다. Google Scholar에 가서 검샣해보면 인용횟수도 볼 수 있습니다. 더불어 무료로 볼 수 있는 유명한 논문입니다.</p>
+<p>Baron, R. M., &amp; Kenny, D. A. (1986). The moderator–mediator variable distinction in social psychological research: Conceptual, strategic, and statistical considerations. Journal of personality and social psychology, 51(6).</p>
+<p>이제 그럼 조절효과를 실습해 보도록 하겠습니다.</p>
+<p><a href="https://youtu.be/a5AZ_d3YDpQ?si=fgmkexMifUdeCtiT">Youtube 바로 가기</a></p>
+</section>
+</section>
+<section id="조절효과를-실습해-보자" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="조절효과를-실습해-보자"><span class="header-section-number">3.2</span> 조절효과를 실습해 보자</h2>
+<p>앞에서 했던 데이터로 계속 실습해 보도록 하겠습니다.</p>
+<p>사용할 테이터와 변수</p>
+<ul>
+<li>House sales price in Kings County, USA (Kaggle.com) <a href="https://github.com/who4u78/Ko_stat_sample_data/blob/master/7.%20%ED%9A%8C%EA%B7%80%EB%B6%84%EC%84%9D%20%EC%83%98%ED%94%8C%EB%8D%B0%EC%9D%B4%ED%84%B0/kc_house_data.csv">다운로드</a>
+<ul>
+<li>종속변수: price (= 매매 가격)</li>
+<li>독립변수: floors (= 층수)</li>
+<li>조절변수: waterfront (= 강/호수/바다 근접 유무)</li>
+</ul></li>
+</ul>
+<p>연구가설</p>
+<ul>
+<li><span class="math inline">\(H_1\)</span>: 주택의 가격은 주택의 층수가 증가하면 정의 방향으로 증가할 것이다</li>
+<li><span class="math inline">\(H_2\)</span>: 주택의 층수가 같아도 물가에 있으면 가격이 더 높을 것이다</li>
+</ul>
+<p>연구가설 1은 독립변수 층수와 종속변수 가격의 관계를 규정한 가설이고, 연구가설 2번이 연구가설 1의 층수와 가격의 관계를 물가의 유무가 조절한다는 조절변수에 대한 가설입니다.</p>
+<p>최근 Andrew Hayes의 Process 때문에 더 유명해지긴 했는데, 사실 이미 오래된 방법 중의 하나가 연구모형을 conceptual model와 statistical model로 나누어 리포트 하는 것입니다. 연구모델이 간단할 때는 꽤 좋은 방법이지만 사실 모형이 복잡하고 변수가 많으면 그다지 깔끔해 보이지 않습니다. 조절효과의 conceptual model과 statistical model은 다음과 같습니다.</p>
+<div id="fig-img11.4" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-img11.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img11-4.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img11.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4: 조절효과의 conceptural &amp; statistical model
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-img11.4" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> 에서 X 는 독립변수를 Y는 종속변수를 W는 조절변수를 의미합니다. Statistical model에서 XW는 독립변수와 조절변수의 interaction 변수를 의미하고 화살표는 인과관계를 그리고 <span class="math inline">\(\beta_i\)</span>는 회귀계수를 의미합니다.</p>
+<p>이제 실습을 통해 조절효과를 마무리해 보도록 하겠습니다.</p>
+<p><a href="https://youtu.be/FNCyxXcL3mk?si=UiLXOXq54wxXf0ZK">Youtube 바로 가기</a></p>
+</section>
+<section id="매개효과란-무엇인가" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="매개효과란-무엇인가"><span class="header-section-number">3.3</span> 매개효과란 무엇인가?</h2>
+<section id="매개효과의-의미와-중요성" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="매개효과의-의미와-중요성"><span class="header-section-number">3.3.1</span> 매개효과의 의미와 중요성</h3>
+<p>매개효과란?</p>
+<ul>
+<li>독립변수가 종속변수에 유의한 영향을 미칠 때,</li>
+<li>독립변수와 종속변수 사이에서 매개하는 변수인 매개 변수를 통해 그 영향이 순차적으로 전달 되는 경우</li>
+<li>독립변수 X, 종속변수 Y 그리고 매개변수 M으로 정의할 때,
+<ul>
+<li><span class="math inline">\(X \longrightarrow M \longrightarrow Y\)</span></li>
+</ul></li>
+<li>이때 중간의 변수 M을 매개변수라고 함</li>
+</ul>
+<p>매개변수가 중요한 이유는 상황에 따라 다르나, 매개의 종류에 의해 매개 변수 없이는 독립변수의 영향이 종속변수까지 도달하지 못하는 경우가 있어 매우 중요한 효과라고 할 수 있습니다.</p>
+</section>
+<section id="매개효과의-종류" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="매개효과의-종류"><span class="header-section-number">3.3.2</span> 매개효과의 종류</h3>
+<p>매개효과는 두 가지가 있습니다.</p>
+<ul>
+<li>완전매개효과 (Full Mediation)</li>
+<li>부분매개효과 (Partial Mediation)</li>
+</ul>
+<p>완전매개효과는 독립변수(X)와 종속변수(Y) 사이의 관계가 매개변수(M)를 통해서만 전달되는 경우를 의미하고, 부분매개효과는 매개변수(M)를 통해 전달되는 것이 있지만, 독립변수(X)와 종속변수(Y) 사이에 직접적인 관계도 존재하는 경우를 의미합니다.</p>
+<div id="fig-img11.5" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-img11.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img11-5.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img11.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.5: 매개효과의 종류
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-img11.5" class="quarto-xref">Figure&nbsp;<span>3.5</span></a> 에서 부분매개효과는 매개변수를 통해 독립변수의 효과가 전달되면서 동시에 독립변수와 종속변수 사이에 직접적인 효과가 있다는 것이 화살표를 통해 알 수 있습니다. 여기서 매개변수를 통해서 전달되는 효과를 간접효과라고 부르고, 독립변수에서 종속변수로 직접 영향을 미치는 효과를 직접효과라고 부릅니다. 그러므로 완전매개효과는 직접효과는 없고 간접효과만 존재하는 것을 의미합니다.</p>
+<p><span class="math display">\[ 직접효과 (Direct Effect): X \longrightarrow Y \]</span></p>
+<p><span class="math display">\[ 간접효과 (Indirect Effect): X \longrightarrow M \longrightarrow Y \]</span></p>
+<p>여기서 이 두 효과 즉 직접효과와 간접효과를 합친 것을 총효과(Total Effect)라고 부릅니다.</p>
+<p><span class="math display">\[ 총효과 (Total Effect): 직접효과(Direct Effect) + 간접효과(Indirect Effect) \]</span></p>
+</section>
+<section id="매개효과-검정방법" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="매개효과-검정방법"><span class="header-section-number">3.3.3</span> 매개효과 검정방법</h3>
+<p>Baron &amp; Kenny (1986) 방법을 통해 매개효과를 검증할 수 있습니다. 가장 많이 알려진 오래된 방법입니다. 다만, 2000년대 이후 이 Baron &amp; Kenny (1986)의 방법이 많은 문제점이 있어서 이를 보완한 방법이 제안되었습니다. 하지만, 전통적인 방법을 먼저 이해하는 것이 중요하므로 이에 대해 알아보도록 하겠습니다.</p>
+<ul>
+<li>회귀분석 3단계 방법 (일명, Baron &amp; Kenny의 방법)
+<ul>
+<li>1단계: <span class="math inline">\(X \longrightarrow M\)</span></li>
+<li>2단계: <span class="math inline">\(X \longrightarrow Y\)</span></li>
+<li>3단계: <span class="math inline">\(X + M \longrightarrow Y\)</span></li>
+</ul></li>
+<li>단계별 회귀분석 결과 해석 방법
+<ul>
+<li>1단계: X는 M에 대해 무조건 유의해야 함</li>
+<li>2단계: X는 Y에 대해 무조건 유의해야 함</li>
+<li>3단계: 2단계 회귀식에 매개변수 M이 새로이 추가된 상황에서 M은 무조건 유의해야 함
+<ul>
+<li>X가 2단계에서는 유의했으나 3단계에서 유의하지 않으면 M은 완전매개</li>
+<li>X가 2단계와 3단계에서 모두 유의하면 M은 부분매개</li>
+</ul></li>
+</ul></li>
+</ul>
+<div id="fig-img11.6" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-img11.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img11-6.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img11.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.6: 매개효과의 검정방법
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-img11.6" class="quarto-xref">Figure&nbsp;<span>3.6</span></a> 을 통해 좀 더 자세하게 알아봅시다.</p>
+<p>우선 부분매개효과를 단계별로 다시 알아보면,</p>
+<ol type="1">
+<li>1단계</li>
+</ol>
+<ul>
+<li><span class="math inline">\(M = \alpha + \beta_1 X\)</span></li>
+<li>매개변수 M을 종속변수로 놓고 X를 독립변수로 하는 회귀분석을 하면,</li>
+<li>독립변수 X의 회귀계수인 <span class="math inline">\(\beta_1\)</span>이 무조건 유의해야 합니다</li>
+</ul>
+<ol start="2" type="1">
+<li>2단계</li>
+</ol>
+<ul>
+<li><span class="math inline">\(Y = \alpha + \pi X\)</span></li>
+<li>종속변수 Y, 독립변수 X로 놓고 회귀분석을 했을 때,</li>
+<li>독립변수 X의 회귀계수인 <span class="math inline">\(\pi\)</span>가 무조건 유의해야 합니다</li>
+</ul>
+<ol start="3" type="1">
+<li>3단계</li>
+</ol>
+<ul>
+<li><span class="math inline">\(Y = \alpha + \beta_2 X + \beta_3 M\)</span></li>
+<li>2단계의 회귀분석에 매개변수 M을 추가하여 회귀분석을 하면,</li>
+<li>매개변수의 회귀계수인 <span class="math inline">\(\beta_3\)</span>가 무조건 유의하고 동시에 <span class="math inline">\(\beta_2\)</span>가 유의하면</li>
+<li>이를 부분매개라고 합니다</li>
+</ul>
+<p>부분매개에서 총효과는 다음과 같습니다.</p>
+<ul>
+<li>총효과란 직접효과와 간접효과의 합</li>
+<li>직접효과: <span class="math inline">\(\beta_2\)</span></li>
+<li>간접효과: <span class="math inline">\(\beta_1 \times \beta_3\)</span></li>
+<li><span class="math inline">\(총효과 = 직접효과 + 간접효과 = \beta_2 + (\beta_1 \times \beta_3)\)</span></li>
+</ul>
+<p>다음으로 완전매개효과에 대해 알아봅시다. 단계별로 완전매개효과를 알아보는 방법 자체는 앞의 부분매개효과를 알아보는 방법과 동일합니다. 다만 3단계의 결과가 다르다고 보면 됩니다.</p>
+<ol type="1">
+<li>1단계</li>
+</ol>
+<ul>
+<li><span class="math inline">\(M = \alpha + \beta_1 X\)</span></li>
+<li>매개변수 M을 종속변수로 놓고 X를 독립변수로 하는 회귀분석을 하면,</li>
+<li>독립변수 X의 회귀계수인 <span class="math inline">\(\beta_1\)</span>이 무조건 유의해야 합니다</li>
+</ul>
+<ol start="2" type="1">
+<li>2단계</li>
+</ol>
+<ul>
+<li><span class="math inline">\(Y = \alpha + \pi X\)</span></li>
+<li>종속변수 Y, 독립변수 X로 놓고 회귀분석을 했을 때,</li>
+<li>독립변수 X의 회귀계수인 <span class="math inline">\(\pi\)</span>가 무조건 유의해야 합니다</li>
+</ul>
+<ol start="3" type="1">
+<li>3단계</li>
+</ol>
+<ul>
+<li><span class="math inline">\(Y = \alpha + \beta_2 X + \beta_3 M\)</span></li>
+<li>2단계의 회귀분석에 매개변수 M을 추가하여 회귀분석을 하면,</li>
+<li>매개변수의 회귀계수인 <span class="math inline">\(\beta_3\)</span>가 무조건 유의하지만, <span class="math inline">\(\beta_2\)</span>가 유의하지 않을 경우</li>
+<li>이를 완전매개효과라고 합니다</li>
+</ul>
+<p>완전매개에서 총효과는 다음과 같습니다.</p>
+<ul>
+<li>총효과란 직접효과와 간접효과의 합이므로,</li>
+<li>직접효과: <span class="math inline">\(\beta_2\)</span> = 0가 되어 직접효과는 없습니다</li>
+<li>간접효과: <span class="math inline">\(\beta_1 \times \beta_3\)</span></li>
+<li><span class="math inline">\(총효과 = 직접효과 + 간접효과 = 0 + \beta_1 \times \beta_3\)</span></li>
+</ul>
+</section>
+<section id="단계-매개효과-검증방법의-문제점" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="단계-매개효과-검증방법의-문제점"><span class="header-section-number">3.3.4</span> 3단계 매개효과 검증방법의 문제점</h3>
+<p>사실 Baron &amp; Kenny (1986)의 3단계 검정방법은 현재로선 거의 전설에 가까운 오래된 방법입니다. Baron &amp; Kenny (1986)의 논문을 읽어보면 정말 간단 명료하면서도 이해가 잘되게 설명을 잘했습니다. 이 방법이 현재까지 우리나라를 포함한 여러 나라에서 가장 많이 사용되는 방법임에는 분명하지만, 2000년대를 넘어가면서 이 방법에 대한 문제점을 지적하는 논문들이 하나 둘씩 등장하기 시작합니다. 가장 많이 지적되는 것이 Baron &amp; Kenny (1986)의 방법은 매개효과를 검증하는 방법이 직접적인 것이 아닌 간접적인 것이라는 점입니다. 단 한 번의 통계적 검정과정을 거친 것이 아니라, 단계별로 조건을 전제로 하기 때문에 불완전하다는 것입니다.</p>
+<p>분명히 맞는 말이긴 합니다만, 매개효과를 이해하고 이를 초보자적인 수준에서 검증하기에는 이보다 좋은 방법은 없습니다. 이후에 이를 보완하는 차원에서 보다 직접적인 검증방법이 등장합니다. 바로 Sobel test입니다. 소벨 테스트는 매해효과의 유의성을 보다 직접적으로 검정하기 위한 방법입니다.</p>
+<div id="fig-img11.7" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-img11.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img11-7.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img11.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.7: 3단계 매개효과 검증방법의 문제점
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-img11.7" class="quarto-xref">Figure&nbsp;<span>3.7</span></a> 에서 보는 것처럼, 매개효과란 결론적으로 독립변수 X, 종속변수 Y, 그리고 매개변수 M이 동시에 겹치는 분산인 c 부분을 의미합니다. 3단계 방법에서 2단계의 회귀계수 <span class="math inline">\(\pi\)</span>는 사실상 독립변수 X의 종속변수 Y에 대한 총효과를 의미합니다. 왜냐하면 매개변수 M이 없기 때문입니다. 그런 이유로 당연히 3단계의 회귀계수 <span class="math inline">\(\beta_2\)</span>는 무조건 <span class="math inline">\(\pi\)</span> 보다 작아야 합니다. 왜냐하면 3단계의 <span class="math inline">\(\beta_2\)</span>는 독립변수 X의 직접효과이고, 3단계의 회귀계수 <span class="math inline">\(\beta_3\)</span>는 매개변수 M의 종속변수 Y에대한 효과이기 때문입니다. 정확하게는 간접효과는 1단계의 회귀계수 <span class="math inline">\(\beta_1\)</span>과 3단계의 회귀계수 <span class="math inline">\(\beta_3\)</span>의 곱이기 때문입니다.</p>
+<p>Baron &amp; Kenny (1986)의 문제점은 이 간접효과부분 즉 <a href="#fig-img11.7" class="quarto-xref">Figure&nbsp;<span>3.7</span></a> 의 <span class="math inline">\(c\)</span>부분에 대한 통계적 검정을 하지 않았다는 것입니다. 그렇다면 이를 통계적으로 검정하는 소벨테스트는 어떻게 하는 것일까요?</p>
+</section>
+<section id="sobel-테스트" class="level3" data-number="3.3.5">
+<h3 data-number="3.3.5" class="anchored" data-anchor-id="sobel-테스트"><span class="header-section-number">3.3.5</span> Sobel 테스트</h3>
+<p>소벨 테스트를 위해 필요한 것은 4가지 입니다.</p>
+<ol type="1">
+<li>Baron &amp; Kenny (1986)의 1단계의 회귀계수 <span class="math inline">\(\beta_1\)</span></li>
+<li>Baron &amp; Kenny (1986)의 1단계의 회귀계수 <span class="math inline">\(\beta_1\)</span>의 표준오차 <span class="math inline">\(SE_{(\beta_1)}\)</span></li>
+<li>Baron &amp; Kenny (1986)의 3단계의 회귀계수 <span class="math inline">\(\beta_3\)</span></li>
+<li>Baron &amp; Kenny (1986)의 3단계의 회귀계수 <span class="math inline">\(\beta_3\)</span>의 표준오차 <span class="math inline">\(SE_{(\beta_3)}\)</span></li>
+</ol>
+<p>기본적으로 소벨테스트는 z-test로 볼 수 있습니다. 제가 유투브 강의안에는 t-value라고 적었는데 사실 책마다 조금씩 다르게 나와서 저도 조금 헷갈리기는 합니다만, 대부분의 경우 z-value를 이야기 합니다. 계산 공식은 다음과 같습니다.</p>
+<p><span class="math inline">\(Sobel \; z-value = \frac{\beta_1 \times \beta_3}{\sqrt{(\beta_1^2 \times SE_{\beta_3}^2) + (\beta_3^2 \times SE_{\beta_1}^2)}}\)</span></p>
+<p>계산 방법이 복잡하지는 않지만 꽤 귀찮은 편입니다. 특히 분모의 부분이 교차하면서 곱해지는 것을 헷갈리면 안됩니다. 요즘은 구글링 하면 자동으로 계산해주는 웹 페이지도 많고, 그다지 어렵지 않은 것이라 소프트웨어가 해결해 주는 경우가 많습니다.</p>
+<p>재미있는 것은 이 Sobel test는 1982년에 발표된 것으로 사실 Baron &amp; Kenny (1986) 보다 먼저 나왔다고 볼 수 있습니다. 그런데, 사실 프로세스적으로 본다면 Sobel test가 Baron &amp; Kenny (1986)을 기반으로 만들어진 것처럼 보이는 것이 사실입니다. 쉽게 말해 둘의 베이스는 거의 같다고 보면 될 것 같습니다.</p>
+<p>문제는 이렇다보니 Sobel test도 문제가 있다는 것입니다. <a href="#fig-img11.7" class="quarto-xref">Figure&nbsp;<span>3.7</span></a> 을 다시 보면 결국 총효과에서 직접효과를 뺀 것이 간접효과 이므로 다음과 같이 표현할 수 있습니다.</p>
+<p><span class="math display">\[ \pi - \beta_2 = \beta_1 \times  \beta_3\]</span></p>
+<p>문제는 만약 위의 좌항과 우항이 다를 경우입니다. 즉, 총효과에서 직접효과를 뺀 나머지가 간접효과가 아니라면 문제가 되는 것이지요. 이런 일이 있을까 싶지만 꽤 자주 발생합니다. 이유는 두 회귀계수의 cross product인 <span class="math inline">\(\beta_1 \times  \beta_3\)</span>의 분포가 불확실하기 때무입니다. 사실 이 cross product의 분포는 데이터의 분포와는 별개의 문제이기도 합니다. 회귀계수의 곱의 결과물의 분포라는게 쉽게 이해가 되지 않지만, 실제로 이런 문제가 발생한다는 것이지요. 즉, 완벽하지는 않다는 의미입니다.</p>
+</section>
+<section id="그렇다면-어떻게" class="level3" data-number="3.3.6">
+<h3 data-number="3.3.6" class="anchored" data-anchor-id="그렇다면-어떻게"><span class="header-section-number">3.3.6</span> 그렇다면 어떻게?</h3>
+<p>이러한 문제를 해결하는 방법이 바로 Bootstraping 입니다.</p>
+<p>이 또한 깊이 들어가면 복잡한 문제인데, 쉽게 말해 반복 샘플링을 하는 시뮬레이션을 한다고 보면 비슷합니다. 이렇게 반복 샘플링을 해서 테스트를 하면, 95% confidence interval을 구하게 되는데, 이때 숫자 0이 이 interval 안에 포함되면 매개효과는 <strong>0</strong>이라는 의미가 되므로 매개효과는 없는 것이고, 0이 포함되지 않는 interval이 나오면 매개효과는 유의하다고 판단합니다.</p>
+<p>과거에는 이 방법이 구현하기 어렵기도 하고, 소프트웨어나 컴퓨터 성능이 뒷받침이 되지 않아서 거의 불가능 했으나, 지금은 쉽게 소프트웨어가 값을 구해줍니다. 참 좋은 세상입니다.</p>
+<p>가능하다면 제 개인적으로는 Baron &amp; Kenny (1986)의 3단계 방법과 소벨 테스트 그리고 부트스트래핑 모두를 테스트 해보실 것을 권합니다. 왜냐하면 이제는 발전된 소프트웨어와 컴퓨팅 능력 덕분에 쉽게 테스트 해볼 수 있기 때문입니다.</p>
+<p>이제 매개효과도 끝이 났네요. 실습을 해보도록 하겠습니다.</p>
+<p><a href="https://youtu.be/o7fF7uwi0s8?si=zuipsUWcMNfMN2lJ">Youtube 바로 가기</a></p>
+</section>
+</section>
+<section id="매개효과를-실습해-보자" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="매개효과를-실습해-보자"><span class="header-section-number">3.4</span> 매개효과를 실습해 보자</h2>
+<p>그럼 이제 매개효과를 실습해 보도록 하겠습니다.</p>
+<p>실습 데이터는 다음과 같습니다.</p>
+<ul>
+<li>Kaggle.com에서 다운로드
+<ul>
+<li><a href="https://www.kaggle.com/uciml/student-alcohol-consumption#student-mat.csv">Student Alcohol Consumption 데이터</a></li>
+</ul></li>
+<li>Github에서 다운로드
+<ul>
+<li><a href="https://github.com/who4u78/Ko_stat_sample_data/blob/master/8.%20%EC%A1%B0%EC%A0%88%ED%9A%A8%EA%B3%BC%EC%99%80%20%EB%A7%A4%EA%B0%9C%ED%9A%A8%EA%B3%BC%20%EC%83%98%ED%94%8C%EB%8D%B0%EC%9D%B4%ED%84%B0/student-mat.csv">다운로드</a></li>
+</ul></li>
+<li>실습모형과 변수
+<ul>
+<li>독립변수: Dalc (workday alcohol consumption: from 1 to 5)</li>
+<li>매개변수: studytime (weekly study time)</li>
+<li>종속변수: failures (number of class failures)</li>
+</ul></li>
+</ul>
+<p>단순하게 설명하자면 술을 먹으면 학습시간이 줄고 클래스에서 fail할 가능성이 높을 것이라는 가설을 세우고 이를 매개효과로 검증해보고자 하는 것입니다. 물론 연습용이다 보니, 가설이 좀 성급하게 만들어진 느낌이 있긴 합니다. 다만, 논리적으로 큰 문제가 없어보이므로 분석을 진행해 보겠습니다.</p>
+<div id="fig-img11.8" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-img11.8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img11-8.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img11.8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.8: 매개효과 실습 결과
+</figcaption>
+</figure>
+</div>
+<p>결과를 살펴보면, 1단계에서 독립변수 Dalc가 매개변수 studytime에 마이너스로 유의한 것을 확인할 수 있습니다. 즉, 술을 많이 마실수록 공부시간이 줄어드는 것이 맞다고 볼 수 있겠습니다. 2단계에서는 독립변수 Dalc가 종속변수 failures에 플러스로 유의합니다. 즉, 술믈 많이 마실수록 클래스에서 fail할 가능성이 더 높아지는 것이지요. 마지막으로 3단계서는 매개변수 studytime의 추가 투입에도 불구하고 독립변수 Dalc는 여전히 유의하고, 추가된 매개변수 studytime 또한 유의합니다. 결론적으로 부분매개효과가 있다고 볼 수 있습니다.</p>
+<p>총효과는 <span class="math inline">\((-0.1847 \times -0.1354) + 0.0886 \approx 0.025 + 0.0886 = 0.1136\)</span>가 됩니다.</p>
+<p>Sobel 테스트를 해보면, 다음과 같습니다.</p>
+<div id="fig-img11.9" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-img11.9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img11-9.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img11.9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.9: Sobel Test
+</figcaption>
+</figure>
+</div>
+<p>소벨테스트를 위한 4개의 값은 <a href="#fig-img11.9" class="quarto-xref">Figure&nbsp;<span>3.9</span></a> 와 같습니다. 이를 테스트하기 위해 구글에서 간단하게 검색을 해보면 다음과 같은 웹이 있습니다. 여러분들은 다른 웹에서 테스트 해보셔도 좋습니다.</p>
+<p><a href="http://quantpsy.org/sobel/sobel.htm">소벨 테스트 계산</a></p>
+<div id="fig-img11.10" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-img11.10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img11-10.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-img11.10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.10: Sobel Test
+</figcaption>
+</figure>
+</div>
+<p>그럼 아래의 링크를 이용해 실습을 해보시길 바랍니다. 고생 많으셨습니다.</p>
+<p><a href="https://youtu.be/TG18RIcbcyw?si=i0qonfKBFf550_bE">Youtube 바로 가기</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter2.html" class="pagination-link" aria-label="회귀분석">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">회귀분석</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter4.html" class="pagination-link" aria-label="로지스틱 회귀분석">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">로지스틱 회귀분석</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
